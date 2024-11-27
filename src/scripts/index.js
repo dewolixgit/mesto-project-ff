@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 // @todo: Темплейт карточки
 
 // @todo: DOM узлы
