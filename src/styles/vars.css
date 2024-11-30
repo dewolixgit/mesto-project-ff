@@ -14,4 +14,6 @@
     --color-button-text-secondary-disabled: #000;
 
     --color-text-danger: #ff0000;
+
+    --black-alpha-80: rgba(0, 0, 0, 0.8);
 }

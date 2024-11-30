@@ -11,8 +11,10 @@ export const CSS_CLASS = {
     popupCloseButton: 'popup__close',
     editProfileButton: 'profile__edit-button',
     newPlaceButton: 'profile__add-button',
+    changeAvatarButton: 'profile__change-avatar-button',
     editProfilePopup: 'popup_type_edit',
     newPlacePopup: 'popup_type_new-card',
+    changeAvatarPopup: 'popup_type_avatar',
 }
 
 export const getClassSelector = (className) => `.${className}`;
