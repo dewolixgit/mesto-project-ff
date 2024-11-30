@@ -4,8 +4,9 @@ export const openModal = (modal) => modal.classList.add(CSS_CLASS.popupVisible);
 
 export const closeModal = (modal) => modal.classList.remove(CSS_CLASS.popupVisible);
 
-export const enableModalCloseHandler = ({ modal, closeElement, onClose }) => {
+export const enableModalCloseHandler = ({ modal, onClose }) => {
     const content = modal.querySelector(getClassSelector(CSS_CLASS.popupContent));
+    const closeElement = modal.querySelector(getClassSelector(CSS_CLASS.popupCloseButton));
 
     const onClick = (event) => {
         if (event.target === closeElement || !content.contains(event.target)) {
@@ -19,6 +20,3 @@ export const enableModalCloseHandler = ({ modal, closeElement, onClose }) => {
 
     return () => document.removeEventListener('click', onClick);
 };
-
-export const getCloseModalElement = (modal) =>
-    modal.querySelector(getClassSelector(CSS_CLASS.popupCloseButton));

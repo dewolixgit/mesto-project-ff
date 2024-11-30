@@ -33,8 +33,6 @@ export const enableOpenNewPlaceModalHandler = (config) => {
         // Откладываем подписку на события, чтобы не было конфликтов с текущим обработчиком
         requestAnimationFrame(() => enableModalCloseHandler({
                 modal,
-                // Todo: убрать параметр
-                closeElement: getCloseModalElement(modal),
                 onClose: () => {
                     clearModalFormValidation(CSS_CLASS.newPlacePopup);
                     removeFormListeners();

@@ -17,7 +17,6 @@ const EDIT_PROFILE_INPUT_NAME = {
 export const enableOpenProfileEditModalHandler = (config) => {
     const clickElement = document.querySelector(config.clickElementSelector);
     const modal = document.querySelector(getClassSelector(CSS_CLASS.editProfilePopup));
-    const closeElement = modal.querySelector(getClassSelector(CSS_CLASS.popupCloseButton));
 
     const onClick = () => {
         openModal(modal);
@@ -37,7 +36,6 @@ export const enableOpenProfileEditModalHandler = (config) => {
         // Откладываем подписку на события, чтобы не было конфликтов с текущим обработчиком
         requestAnimationFrame(() => enableModalCloseHandler({
                 modal,
-                closeElement,
                 onClose: () => {
                     clearModalFormValidation(CSS_CLASS.editProfilePopup);
                     removeFormListeners();
