@@ -1,12 +1,12 @@
 import '../pages/index.css';
 import {enableOpenProfileEditModalHandler} from "./profile";
 import {CSS_CLASS, getClassSelector} from "./selector";
+import {populateForm} from "./form";
+import {enableValidation} from "./validation";
 
 enableOpenProfileEditModalHandler({
     clickElementSelector: getClassSelector(CSS_CLASS.editProfileButton),
-    modalSelector: getClassSelector(CSS_CLASS.editProfilePopup),
-    modalCloseElementSelector: getClassSelector(CSS_CLASS.popupCloseButton),
-    modalVisibleClass: CSS_CLASS.popupVisible
+    modalVisibleClass: CSS_CLASS.popupVisible,
 });
 
 // @todo: Темплейт карточки

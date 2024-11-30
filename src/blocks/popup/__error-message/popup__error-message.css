@@ -1,0 +1,19 @@
+.popup__error-message {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    z-index: 1;
+
+    transform: translateY(100%);
+
+    width: 100%;
+
+    color: var(--color-text-danger);
+    font-size: 12px;
+    line-height: 1.2;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+}

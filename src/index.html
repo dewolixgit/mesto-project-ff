@@ -37,11 +37,16 @@
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" name="edit-profile">
-        <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
-        <span class="popup__error popup__error_type_name">
-          Ошибка
-        </span>
-        <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+        <div class="popup__form-group">
+          <div class="popup__form-item">
+            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+            <span class="popup__error-message popup__error-message_type_name"></span>
+          </div>
+          <div class="popup__form-item">
+            <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+            <span class="popup__error-message popup__error-message_type_description"></span>
+          </div>
+        </div>
         <button type="submit" class="button popup__button">Сохранить</button>
       </form>
     </div>

@@ -1,0 +1,17 @@
+:root {
+    --color-background-primary: #000;
+    --color-background-secondary: #fff;
+
+    --color-text-primary: #fff;
+    --color-text-secondary: #000;
+
+    --color-button-background-primary: #fff;
+    --color-button-background-secondary: #000;
+    --color-button-background-secondary-disabled: #fff;
+
+    --color-button-text-primary: #000;
+    --color-button-text-secondary: #fff;
+    --color-button-text-secondary-disabled: #000;
+
+    --color-text-danger: #ff0000;
+}

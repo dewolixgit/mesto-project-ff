@@ -7,7 +7,7 @@
 
 .profile {
   font-family: 'Inter', Arial, sans-serif;
-  color: #fff;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   padding: 36px 0;
