@@ -1,3 +1,7 @@
+export const CSS_ID = {
+    cardTemplate: 'card-template',
+};
+
 export const CSS_CLASS = {
     popupVisible: 'popup_is-opened',
     popupContent: 'popup__content',
@@ -15,7 +19,17 @@ export const CSS_CLASS = {
     editProfilePopup: 'popup_type_edit',
     newPlacePopup: 'popup_type_new-card',
     changeAvatarPopup: 'popup_type_avatar',
+    card: 'card',
+    cardImage: 'card__image',
+    cardTitle: 'card__title',
+    cardLikeButton: 'card__like-button',
+    cardLikeButtonActive: 'card__like-button_is-active',
+    cardLikesCount: 'card__likes-count',
+    cardDeleteButton: 'card__delete-button',
+    placesList: 'places__list',
 }
+
+export const getIdSelector = (id) => `#${id}`;
 
 export const getClassSelector = (className) => `.${className}`;
 

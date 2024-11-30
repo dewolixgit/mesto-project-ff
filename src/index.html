@@ -25,8 +25,7 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="places page__section">
-      <ul class="places__list">
-      </ul>
+      <ul class="places__list"></ul>
     </section>
   </main>
   <footer class="footer page__section">
@@ -89,16 +88,17 @@
   </div>
 </div>
 
-<template id="card-template">
-  <li class="places__item card">
+<!-- Переносы строк до и после li удалены, чтобы не было лишних текстовых элементов -->
+<template id="card-template"><li class="places__item card">
     <img class="card__image" src="" alt="" />
     <button type="button" class="card__delete-button"></button>
     <div class="card__description">
       <h2 class="card__title">
       </h2>
-      <button type="button" class="card__like-button"></button>
+      <button type="button" class="card__like-button">
+        <span class="card__likes-count">0</span>
+      </button>
     </div>
-  </li>
-</template>
+  </li></template>
 </body>
 </html>
