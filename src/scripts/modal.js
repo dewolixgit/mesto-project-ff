@@ -18,4 +18,7 @@ export const enableModalCloseHandler = ({ modal, closeElement, onClose }) => {
     document.addEventListener('click', onClick);
 
     return () => document.removeEventListener('click', onClick);
-}
+};
+
+export const getCloseModalElement = (modal) =>
+    modal.querySelector(getClassSelector(CSS_CLASS.popupCloseButton));

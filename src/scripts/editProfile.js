@@ -4,6 +4,14 @@ import {clearModalFormValidation, clearValidation, enableModalFormValidation, en
 import {populateForm, populatePopupFormOnlyInputs} from "./form";
 
 /**
+ * Атрибуты name инпутов формы редактирования профиля
+ */
+const EDIT_PROFILE_INPUT_NAME = {
+    name: 'name',
+    description: 'description',
+};
+
+/**
  * @param config.clickElementSelector - селектор элемента, при клике на который нужно вызывать модалку редактирования профиля
  */
 export const enableOpenProfileEditModalHandler = (config) => {
@@ -17,8 +25,8 @@ export const enableOpenProfileEditModalHandler = (config) => {
         populatePopupFormOnlyInputs({
             modal,
             data: {
-                name: '',
-                description: '',
+                [EDIT_PROFILE_INPUT_NAME.name]: '',
+                [EDIT_PROFILE_INPUT_NAME.description]: '',
             }
         });
 

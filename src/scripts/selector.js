@@ -10,7 +10,9 @@ export const CSS_CLASS = {
     popupErrorMessageVisible: 'popup__error-message_visible',
     popupCloseButton: 'popup__close',
     editProfileButton: 'profile__edit-button',
+    newPlaceButton: 'profile__add-button',
     editProfilePopup: 'popup_type_edit',
+    newPlacePopup: 'popup_type_new-card',
 }
 
 export const getClassSelector = (className) => `.${className}`;

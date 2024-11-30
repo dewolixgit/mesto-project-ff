@@ -67,11 +67,13 @@ const enableButton = ({ button, disabledClass }) => {
 }
 
 const getValidationMessage = (input) => {
+    console.log('getValidationMessage dataset', input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage]);
+    console.log('getValidationMessage validationMessage', input.validationMessage);
+
     if (
         input.validity.patternMismatch
-        && input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage]
     ) {
-        return input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage];
+        return input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage] ? input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage] : input.validationMessage;
     }
 
     return input.validationMessage;
@@ -91,9 +93,11 @@ const getValidationMessage = (input) => {
  * Этот класс будет присвоен элементу с ошибкой при невалидности конкретного инпута
  */
 export const enableValidation = (config) => {
-    const form = document.querySelector(config.formSelector);
-    const inputs = Array.from(form.querySelectorAll(config.inputSelector));
-    const submitButton = form.querySelector(config.submitButtonSelector);
+    const { form, inputs, submitButton } = getFormElements({
+        formSelector: config.formSelector,
+        inputSelector: config.inputSelector,
+        submitButtonSelector: config.submitButtonSelector
+    });
 
     const showInputError = (input) => {
         input.classList.add(config.inputErrorClass);
