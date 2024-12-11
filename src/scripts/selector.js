@@ -3,6 +3,9 @@ export const CSS_ID = {
 };
 
 export const CSS_CLASS = {
+    profileImage: 'profile__image',
+    profileTitle: 'profile__title',
+    profileDescription: 'profile__description',
     popupVisible: 'popup_is-opened',
     popupContent: 'popup__content',
     popupForm: 'popup__form',

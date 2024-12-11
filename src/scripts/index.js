@@ -1,14 +1,14 @@
 import '../pages/index.css';
 import {enableOpenProfileEditModalHandler} from "./editProfile";
 import {CSS_CLASS, getClassSelector} from "./selector";
-import {populateForm} from "./form";
-import {enableValidation} from "./validation";
 import {enableOpenNewPlaceModalHandler} from "./newPlace";
 import {enableOpenChangeAvatarModalHandler} from "./changeAvatar";
 import {initCardsElements, MOCK_CARDS} from "./cards";
+import {updateProfileSection} from "./profile";
 
 enableOpenProfileEditModalHandler({
     clickElementSelector: getClassSelector(CSS_CLASS.editProfileButton),
+    onSuccessSave: updateProfileSection,
 });
 
 enableOpenNewPlaceModalHandler({
