@@ -29,6 +29,7 @@ export const CSS_CLASS = {
     cardLikeButtonActive: 'card__like-button_is-active',
     cardLikesCount: 'card__likes-count',
     cardDeleteButton: 'card__delete-button',
+    cardDeleteButtonHidden: 'card__delete-button_hidden',
     placesList: 'places__list',
 }
 

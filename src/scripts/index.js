@@ -3,7 +3,7 @@ import {enableOpenProfileEditModalHandler} from "./editProfile";
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {enableOpenNewPlaceModalHandler} from "./newPlace";
 import {enableOpenChangeAvatarModalHandler} from "./changeAvatar";
-import {initCardsElements, MOCK_CARDS} from "./cards";
+import {initCardElement, initCardsElements, MOCK_CARDS, normalizeCard} from "./cards";
 import {updateProfileSection} from "./profile";
 
 enableOpenProfileEditModalHandler({
@@ -12,7 +12,9 @@ enableOpenProfileEditModalHandler({
 });
 
 enableOpenNewPlaceModalHandler({
+    userId: 2,
     clickElementSelector: getClassSelector(CSS_CLASS.newPlaceButton),
+    onSuccessSave: initCardElement,
 });
 
 enableOpenChangeAvatarModalHandler({
@@ -20,8 +22,9 @@ enableOpenChangeAvatarModalHandler({
 })
 
 initCardsElements({
-    cardEntities: MOCK_CARDS,
-    userId: 2,
+    cardEntities: MOCK_CARDS.map(
+        (apiCard) => normalizeCard({ userId: 2, card: apiCard })
+    ),
 });
 
 // @todo: Темплейт карточки

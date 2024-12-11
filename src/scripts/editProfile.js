@@ -13,18 +13,18 @@ const EDIT_PROFILE_INPUT_NAME = {
 };
 
 const enableSaveButtonHandlers = ({ modal, onSuccessSave }) => {
-    const button = modal.querySelector(getClassSelector(CSS_CLASS.popupButton));
+    const saveButton = modal.querySelector(getClassSelector(CSS_CLASS.popupButton));
 
     const onClickSave = async (event) => {
         event.preventDefault();
 
         console.log('start save');
 
-        button.textContent = TEXTS.editProfileSaveButtonLoading;
+        saveButton.textContent = TEXTS.editProfileSaveButtonLoading;
 
         await (new Promise((r) => setTimeout(r, 2000)));
 
-        button.textContent = TEXTS.editProfileSaveButton;
+        saveButton.textContent = TEXTS.editProfileSaveButton;
 
         closeModal(modal);
 
@@ -34,10 +34,10 @@ const enableSaveButtonHandlers = ({ modal, onSuccessSave }) => {
         });
     }
 
-    button.addEventListener('click', onClickSave);
+    saveButton.addEventListener('click', onClickSave);
 
     return () => {
-        button.removeEventListener('click', onClickSave)
+        saveButton.removeEventListener('click', onClickSave)
     }
 }
 

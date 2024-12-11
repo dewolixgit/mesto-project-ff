@@ -1,4 +1,7 @@
 export const TEXTS = {
     editProfileSaveButton: 'Сохранить',
-    editProfileSaveButtonLoading: 'Сохранение...'
+    editProfileSaveButtonLoading: 'Сохранение...',
+
+    newPlaceSaveButton: 'Сохранить',
+    newPlaceSaveButtonLoading: 'Сохранение...',
 }
