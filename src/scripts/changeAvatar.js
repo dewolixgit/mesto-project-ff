@@ -1,7 +1,8 @@
-import {enableModalCloseHandler, openModal} from "./modal";
+import {closeModal, enableModalCloseHandler, openModal} from "./modal";
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {clearModalFormValidation, clearValidation, enableModalFormValidation, enableValidation} from "./validation";
 import {populateForm, populatePopupFormOnlyInputs} from "./form";
+import {TEXTS} from "./texts";
 
 /**
  * Атрибуты name инпутов формы редактирования профиля
@@ -10,10 +11,37 @@ const CHANGE_AVATAR_INPUT_NAME = {
     link: 'link',
 };
 
+const enableSaveButtonHandler = ({ modal, onSuccessSave }) => {
+    const saveButton = modal.querySelector(getClassSelector(CSS_CLASS.popupButton));
+
+    const onClickSave = async (event) => {
+        event.preventDefault();
+
+        console.log('start save');
+
+        saveButton.textContent = TEXTS.editProfileSaveButtonLoading;
+
+        await (new Promise((r) => setTimeout(r, 2000)));
+
+        saveButton.textContent = TEXTS.editProfileSaveButton;
+
+        closeModal(modal);
+
+        onSuccessSave?.('https://via.placeholder.com/150');
+    }
+
+    saveButton.addEventListener('click', onClickSave);
+
+    return () => {
+        saveButton.removeEventListener('click', onClickSave)
+    }
+}
+
 /**
- * @param config.clickElementSelector - селектор элемента, при клике на который нужно вызывать модалку редактирования профиля
+ * @param clickElementSelector - селектор элемента, при клике на который нужно вызывать модалку редактирования профиля
+ * @param onSuccessSave - колбэк, который вызывается после успешного сохранения аватара
  */
-export const enableOpenChangeAvatarModalHandler = (config) => {
+export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuccessSave }) => {
     const modal = document.querySelector(getClassSelector(CSS_CLASS.changeAvatarPopup));
 
     const onClick = () => {
@@ -28,7 +56,10 @@ export const enableOpenChangeAvatarModalHandler = (config) => {
 
         const removeFormListeners = enableModalFormValidation(CSS_CLASS.changeAvatarPopup);
 
-        // Todo: Включить обработчики клика на "Сохранить"
+        enableSaveButtonHandler({
+            modal,
+            onSuccessSave
+        })
 
         // Откладываем подписку на события, чтобы не было конфликтов с текущим обработчиком
         requestAnimationFrame(() => enableModalCloseHandler({
@@ -41,7 +72,7 @@ export const enableOpenChangeAvatarModalHandler = (config) => {
         );
     };
 
-    const clickElement = document.querySelector(config.clickElementSelector);
+    const clickElement = document.querySelector(clickElementSelector);
 
     clickElement.addEventListener('click', onClick);
 

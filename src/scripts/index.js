@@ -19,6 +19,7 @@ enableOpenNewPlaceModalHandler({
 
 enableOpenChangeAvatarModalHandler({
     clickElementSelector: getClassSelector(CSS_CLASS.changeAvatarButton),
+    onSuccessSave: (avatar) => updateProfileSection({ avatar }),
 })
 
 initCardsElements({
