@@ -10,8 +10,5 @@ export const addEventListener = (element, event, handler) => {
 
 export const appendAndGetElement = ({ element, parent }) => {
     parent.appendChild(element);
-
-    console.log('appendAndGetElement', parent.childNodes);
-
     return parent.lastChild;
 }

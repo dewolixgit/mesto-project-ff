@@ -3,30 +3,51 @@ import {enableOpenProfileEditModalHandler} from "./editProfile";
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {enableOpenNewPlaceModalHandler} from "./newPlace";
 import {enableOpenChangeAvatarModalHandler} from "./changeAvatar";
-import {initCardElement, initCardsElements, MOCK_CARDS, normalizeCard} from "./cards";
+import {initCardElement} from "./cards";
 import {updateProfileSection} from "./profile";
+import {requestCards, requestUser} from "./api";
+import {normalizePlaceCard, normalizeUser, populatePlaceCardByUserData} from "./entities";
 
-enableOpenProfileEditModalHandler({
-    clickElementSelector: getClassSelector(CSS_CLASS.editProfileButton),
-    onSuccessSave: updateProfileSection,
-});
+const init = async () => {
+    const [apiUser, apiCards] = await Promise.all([
+        requestUser(),
+        requestCards()
+    ]);
 
-enableOpenNewPlaceModalHandler({
-    userId: 2,
-    clickElementSelector: getClassSelector(CSS_CLASS.newPlaceButton),
-    onSuccessSave: initCardElement,
-});
+    const userEntity = apiUser ? normalizeUser(apiUser) : null;
 
-enableOpenChangeAvatarModalHandler({
-    clickElementSelector: getClassSelector(CSS_CLASS.changeAvatarButton),
-    onSuccessSave: (avatar) => updateProfileSection({ avatar }),
-})
+    if (userEntity) {
+        updateProfileSection(userEntity);
 
-initCardsElements({
-    cardEntities: MOCK_CARDS.map(
-        (apiCard) => normalizeCard({ userId: 2, card: apiCard })
-    ),
-});
+        enableOpenChangeAvatarModalHandler({
+            clickElementSelector: getClassSelector(CSS_CLASS.changeAvatarButton),
+            onSuccessSave: (avatar) => updateProfileSection({ avatar }),
+            userEntity
+        });
+
+        enableOpenProfileEditModalHandler({
+            clickElementSelector: getClassSelector(CSS_CLASS.editProfileButton),
+            onSuccessSave: updateProfileSection,
+            userEntity
+        });
+
+        enableOpenNewPlaceModalHandler({
+            userEntity,
+            clickElementSelector: getClassSelector(CSS_CLASS.newPlaceButton),
+            onSuccessSave: initCardElement,
+        });
+    }
+
+    if (apiCards && userEntity) {
+        apiCards.map((apiCard) => normalizePlaceCard({
+                apiCard,
+                userId: userEntity.id
+            }))
+            .forEach(initCardElement);
+    }
+};
+
+init();
 
 // @todo: Темплейт карточки
 

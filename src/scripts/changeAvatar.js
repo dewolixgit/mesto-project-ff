@@ -1,8 +1,9 @@
 import {closeModal, enableModalCloseHandler, openModal} from "./modal";
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {clearModalFormValidation, clearValidation, enableModalFormValidation, enableValidation} from "./validation";
-import {populateForm, populatePopupFormOnlyInputs} from "./form";
+import {getPopupFormInputValues, populateForm, populatePopupFormOnlyInputs} from "./form";
 import {TEXTS} from "./texts";
+import {requestUpdateUserAvatar} from "./api";
 
 /**
  * Атрибуты name инпутов формы редактирования профиля
@@ -17,17 +18,21 @@ const enableSaveButtonHandler = ({ modal, onSuccessSave }) => {
     const onClickSave = async (event) => {
         event.preventDefault();
 
-        console.log('start save');
-
         saveButton.textContent = TEXTS.editProfileSaveButtonLoading;
 
-        await (new Promise((r) => setTimeout(r, 2000)));
+        const formValues = getPopupFormInputValues(modal);
+
+        const response = await requestUpdateUserAvatar(
+            formValues[CHANGE_AVATAR_INPUT_NAME.link]
+        );
 
         saveButton.textContent = TEXTS.editProfileSaveButton;
 
         closeModal(modal);
 
-        onSuccessSave?.('https://via.placeholder.com/150');
+        if (response.avatar) {
+            onSuccessSave?.(response.avatar);
+        }
     }
 
     saveButton.addEventListener('click', onClickSave);
@@ -39,9 +44,10 @@ const enableSaveButtonHandler = ({ modal, onSuccessSave }) => {
 
 /**
  * @param clickElementSelector - селектор элемента, при клике на который нужно вызывать модалку редактирования профиля
+ * @param userEntity - объект текущего пользователя
  * @param onSuccessSave - колбэк, который вызывается после успешного сохранения аватара
  */
-export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuccessSave }) => {
+export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuccessSave, userEntity }) => {
     const modal = document.querySelector(getClassSelector(CSS_CLASS.changeAvatarPopup));
 
     const onClick = () => {
@@ -50,7 +56,7 @@ export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuc
         populatePopupFormOnlyInputs({
             modal,
             data: {
-                [CHANGE_AVATAR_INPUT_NAME.link]: '',
+                [CHANGE_AVATAR_INPUT_NAME.link]: userEntity.avatar,
             }
         });
 

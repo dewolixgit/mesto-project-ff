@@ -1,16 +1,17 @@
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {closeModal, enableModalCloseHandler, openModal} from "./modal";
-import {populatePopupFormOnlyInputs} from "./form";
+import {getPopupFormInputValues, populatePopupFormOnlyInputs} from "./form";
 import {clearModalFormValidation, enableModalFormValidation} from "./validation";
 import {TEXTS} from "./texts";
-import {normalizeCard} from "./cards";
+import {normalizePlaceCard} from "./entities";
+import {requestCreatePlaceCard} from "./api";
 
 const NEW_PLACE_INPUT_NAME = {
     placeName: 'place-name',
     link: 'link',
 };
 
-const enableCreateNewPlaceHandlers = ({ modal, onSuccessSave, userId }) => {
+const enableCreateNewPlaceHandlers = ({ modal, onSuccessSave, userEntity }) => {
     const saveButton = modal.querySelector(getClassSelector(CSS_CLASS.popupButton));
 
     const onClickSave = async (event) => {
@@ -18,23 +19,16 @@ const enableCreateNewPlaceHandlers = ({ modal, onSuccessSave, userId }) => {
 
         saveButton.textContent = TEXTS.newPlaceSaveButtonLoading;
 
-        await (new Promise((r) => setTimeout(r, 2000)));
+        const formValues = getPopupFormInputValues(modal)
+
+        const newApiCard = await requestCreatePlaceCard({
+            name: formValues[NEW_PLACE_INPUT_NAME.placeName],
+            link: formValues[NEW_PLACE_INPUT_NAME.link],
+        });
 
         saveButton.textContent = TEXTS.newPlaceSaveButton;
 
-        // Todo: Нормализация в реквесте
-        onSuccessSave?.(normalizeCard({
-            userId,
-            card: {
-                _id: 111,
-                name: 'Место 111',
-                link: 'https://via.placeholder.com/300',
-                likes: [],
-                owner: {
-                    _id: userId,
-                }
-            }
-        }));
+        onSuccessSave?.(normalizePlaceCard({ apiCard: newApiCard, userId: userEntity.id }));
 
         closeModal(modal);
     }
@@ -50,9 +44,9 @@ const enableCreateNewPlaceHandlers = ({ modal, onSuccessSave, userId }) => {
  * @param clickElementSelector - селектор элемента,
  * при клике на который нужно вызывать модалку создания карточки места
  * @param onSuccessSave - колбэк, который вызывается после успешного сохранения данных
- * @param userId - id текущего пользователя
+ * @param userEntity - сущность текущего пользователя
  */
-export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccessSave, userId }) => {
+export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccessSave, userEntity }) => {
     const modal = document.querySelector(getClassSelector(CSS_CLASS.newPlacePopup));
 
     const onClick = () => {
@@ -71,7 +65,7 @@ export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccess
         enableCreateNewPlaceHandlers({
             modal,
             onSuccessSave,
-            userId,
+            userEntity,
         });
 
         // Откладываем подписку на события, чтобы не было конфликтов с текущим обработчиком
@@ -84,8 +78,6 @@ export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccess
             })
         );
     };
-
-    console.log('clickElementSelector', clickElementSelector);
 
     const clickElement = document.querySelector(clickElementSelector);
 
