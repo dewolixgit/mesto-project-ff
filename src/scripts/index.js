@@ -6,7 +6,7 @@ import {enableOpenChangeAvatarModalHandler} from "./changeAvatar";
 import {initCardElement} from "./cards";
 import {updateProfileSection} from "./profile";
 import {requestCards, requestUser} from "./api";
-import {normalizePlaceCard, normalizeUser, populatePlaceCardByUserData} from "./entities";
+import {normalizePlaceCard, normalizeUser} from "./entities";
 
 const init = async () => {
     const [apiUser, apiCards] = await Promise.all([
@@ -48,13 +48,3 @@ const init = async () => {
 };
 
 init();
-
-// @todo: Темплейт карточки
-
-// @todo: DOM узлы
-
-// @todo: Функция создания карточки
-
-// @todo: Функция удаления карточки
-
-// @todo: Вывести карточки на страницу

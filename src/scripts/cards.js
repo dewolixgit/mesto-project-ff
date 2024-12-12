@@ -2,6 +2,7 @@ import { addEventListener, appendAndGetElement, copyTemplateById } from "./eleme
 import { CSS_CLASS, CSS_ID, getClassSelector } from "./selector";
 import { requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard } from "./api";
 import { getLikesCountApiPlaceCard } from "./entities";
+import {openPlaceCardImagePreviewModal} from "./imagePreviewModal";
 
 const getPlacesListElement = () => document.querySelector(getClassSelector(CSS_CLASS.placesList));
 const getTitleElement = (cardElement) => cardElement.querySelector(getClassSelector(CSS_CLASS.cardTitle));
@@ -40,7 +41,7 @@ export const createCardFragment = (cardEntity) => {
     return cardFragment;
 }
 
-const enableCardHandlers = ({ cardElement, onLike, onDelete }) => {
+const enableCardHandlers = ({ cardElement, onLike, onDelete, onClickImage }) => {
     const removeLikeButtonListener = addEventListener(
         getLikeButtonElement(cardElement),
         'click',
@@ -53,9 +54,16 @@ const enableCardHandlers = ({ cardElement, onLike, onDelete }) => {
         onDelete
     );
 
+    const removeClickImageListener = addEventListener(
+        getImageElement(cardElement),
+        'click',
+        onClickImage
+    );
+
     return () => {
         removeLikeButtonListener();
         removeDeleteButtonListeners();
+        removeClickImageListener();
     }
 };
 
@@ -117,5 +125,6 @@ export const initCardElement = (cardEntity) => {
             cardElement,
             removeListeners
         }),
+        onClickImage: () => openPlaceCardImagePreviewModal(cardEntity)
     });
 };
