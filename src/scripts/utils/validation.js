@@ -1,6 +1,6 @@
-import {CSS_CLASS, getClassInClassSelector, getClassSelector, getInputErrorSelector} from "./selector";
-import {DATA_ATTRIBUTE_KEY} from "./dataAttribute";
-import {addEventListenerElements, removeEventListenerElements} from "./utils";
+import {CSS_CLASS, getClassInClassSelector, getClassSelector, getInputErrorSelector} from "../dom/selector";
+import {DATA_ATTRIBUTE_KEY} from "../dom/dataAttribute";
+import {addEventListenerElements, removeEventListenerElements} from "../dom/utils";
 
 /**
  * @param config.formSelector - селектор формы

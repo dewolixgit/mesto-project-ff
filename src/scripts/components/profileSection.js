@@ -1,4 +1,4 @@
-import {CSS_CLASS, getClassSelector} from "./selector";
+import {CSS_CLASS, getClassSelector} from "../dom/selector";
 
 export const updateProfileSection = ({ name, about, avatar }) => {
     if (name) {

@@ -1,10 +1,10 @@
 import '../pages/index.css';
-import {enableOpenProfileEditModalHandler} from "./editProfile";
-import {CSS_CLASS, getClassSelector} from "./selector";
-import {enableOpenNewPlaceModalHandler} from "./newPlace";
-import {enableOpenChangeAvatarModalHandler} from "./changeAvatar";
-import {initCardElement} from "./cards";
-import {updateProfileSection} from "./profile";
+import {enableOpenProfileEditModalHandler} from "./components/editProfileModal";
+import {enableOpenChangeAvatarModalHandler} from "./components/changeAvatarModal";
+import {enableOpenNewPlaceModalHandler} from "./components/newPlaceModal";
+import {initCardElement} from "./components/placeCard";
+import {updateProfileSection} from "./components/profileSection";
+import {CSS_CLASS, getClassSelector} from "./dom/selector";
 import {requestCards, requestUser} from "./api";
 import {normalizePlaceCard, normalizeUser} from "./entities";
 

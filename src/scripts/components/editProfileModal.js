@@ -1,9 +1,9 @@
-import {closeModal, enableModalCloseHandler, openModal} from "./modal";
-import {CSS_CLASS, getClassSelector} from "./selector";
-import {clearModalFormValidation, clearValidation, enableModalFormValidation, enableValidation} from "./validation";
-import {getPopupFormInputValues, populateForm, populatePopupFormOnlyInputs} from "./form";
-import {TEXTS} from "./texts";
-import {requestUpdateProfile} from "./api";
+import {closeModal, enableModalCloseHandler, openModal} from "../dom/modal";
+import {CSS_CLASS, getClassSelector} from "../dom/selector";
+import {clearModalFormValidation, enableModalFormValidation} from "../utils/validation";
+import {getPopupFormInputValues, populatePopupFormOnlyInputs} from "../dom/form";
+import {TEXTS} from "../config/texts";
+import {requestUpdateProfile} from "../api";
 
 /**
  * Атрибуты name инпутов формы редактирования профиля

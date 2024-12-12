@@ -1,7 +1,7 @@
-import { addEventListener, appendAndGetElement, copyTemplateById } from "./elements";
-import { CSS_CLASS, CSS_ID, getClassSelector } from "./selector";
-import { requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard } from "./api";
-import { getLikesCountApiPlaceCard } from "./entities";
+import { addEventListener, appendAndGetElement, copyTemplateById } from "../dom/elements";
+import { CSS_CLASS, CSS_ID, getClassSelector } from "../dom/selector";
+import { requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard } from "../api";
+import { getLikesCountApiPlaceCard } from "../entities";
 import {openPlaceCardImagePreviewModal} from "./imagePreviewModal";
 
 const getPlacesListElement = () => document.querySelector(getClassSelector(CSS_CLASS.placesList));

@@ -1,5 +1,5 @@
-import {enableModalCloseHandler, openModal} from "./modal";
-import {CSS_CLASS, getClassSelector} from "./selector";
+import {enableModalCloseHandler, openModal} from "../dom/modal";
+import {CSS_CLASS, getClassSelector} from "../dom/selector";
 
 const openImagePreviewModal = ({ imageSrc, caption }) => {
     const modal = document.querySelector(getClassSelector(CSS_CLASS.imagePreviewPopup));

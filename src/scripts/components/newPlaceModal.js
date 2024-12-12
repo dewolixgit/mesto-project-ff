@@ -1,10 +1,10 @@
-import {CSS_CLASS, getClassSelector} from "./selector";
-import {closeModal, enableModalCloseHandler, openModal} from "./modal";
-import {getPopupFormInputValues, populatePopupFormOnlyInputs} from "./form";
-import {clearModalFormValidation, enableModalFormValidation} from "./validation";
-import {TEXTS} from "./texts";
-import {normalizePlaceCard} from "./entities";
-import {requestCreatePlaceCard} from "./api";
+import {CSS_CLASS, getClassSelector} from "../dom/selector";
+import {closeModal, enableModalCloseHandler, openModal} from "../dom/modal";
+import {getPopupFormInputValues, populatePopupFormOnlyInputs} from "../dom/form";
+import {clearModalFormValidation, enableModalFormValidation} from "../utils/validation";
+import {TEXTS} from "../config/texts";
+import {normalizePlaceCard} from "../entities";
+import {requestCreatePlaceCard} from "../api";
 
 const NEW_PLACE_INPUT_NAME = {
     placeName: 'place-name',
