@@ -1,9 +1,17 @@
 import {CSS_CLASS, getClassSelector} from "./selector";
 import {addEventListener} from "./elements";
 
-export const openModal = (modal) => modal.classList.add(CSS_CLASS.popupVisible);
+export const openModal = (modal) => {
+    // Поскольку модальное окно никогда не display none, следует обработать через aria-hidden
+    modal.ariaHidden = false;
+    modal.classList.add(CSS_CLASS.popupVisible)
+};
 
-export const closeModal = (modal) => modal.classList.remove(CSS_CLASS.popupVisible);
+export const closeModal = (modal) => {
+    // Поскольку модальное окно никогда не display none, следует обработать через aria-hidden
+    modal.ariaHidden = true;
+    modal.classList.remove(CSS_CLASS.popupVisible)
+};
 
 export const enableModalCloseHandler = ({ modal, onClose }) => {
     const content = modal.querySelector(getClassSelector(CSS_CLASS.popupContent));
