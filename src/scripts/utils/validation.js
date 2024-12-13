@@ -67,9 +67,6 @@ const enableButton = ({ button, disabledClass }) => {
 }
 
 const getValidationMessage = (input) => {
-    console.log('getValidationMessage dataset', input.dataset[DATA_ATTRIBUTE_KEY.patternErrorMessage]);
-    console.log('getValidationMessage validationMessage', input.validationMessage);
-
     if (
         input.validity.patternMismatch
     ) {
