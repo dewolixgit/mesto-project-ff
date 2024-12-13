@@ -1,7 +1,7 @@
 import {addEventListener, insertAndGetElement, copyTemplateById} from "../dom/elements";
 import {CSS_CLASS, CSS_ID, getClassSelector} from "../dom/selector";
 import {requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard} from "../api";
-import {getLikesCountApiPlaceCard, normalizePlaceCard} from "../entities";
+import {normalizePlaceCard} from "../entities";
 import {openPlaceCardImagePreviewModal} from "./imagePreviewModal";
 import {copyByMutate} from "../utils/copyByMutate";
 
@@ -101,7 +101,7 @@ const handleLikeCard = async ({ cardEntity, cardElement, userEntity }) => {
 
         getLikeButtonElement(cardElement).classList.add(CSS_CLASS.cardLikeButtonActive);
         getLikesCountElement(cardElement).textContent =
-            getLikesCountTextContent(getLikesCountApiPlaceCard(updatedApiCard));
+            getLikesCountTextContent(updatedCardEntity.likesCount);
 
         copyByMutate({
             from: updatedCardEntity,

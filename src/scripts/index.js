@@ -22,13 +22,20 @@ const init = async () => {
 
         enableOpenChangeAvatarModalHandler({
             clickElementSelector: getClassSelector(CSS_CLASS.changeAvatarButton),
-            onSuccessSave: (avatar) => updateProfileSection({ avatar }),
+            onSuccessSave: (avatar) => {
+                updateProfileSection({ avatar });
+                userEntity.avatar = avatar;
+            },
             userEntity
         });
 
         enableOpenProfileEditModalHandler({
             clickElementSelector: getClassSelector(CSS_CLASS.editProfileButton),
-            onSuccessSave: updateProfileSection,
+            onSuccessSave: (updatedData) => {
+                updateProfileSection(updatedData);
+                userEntity.name = updatedData.name;
+                userEntity.about = updatedData.about;
+            },
             userEntity
         });
 
