@@ -8,3 +8,6 @@ export const normalizePlaceCard = ({ apiCard, userId } ) => ({
 });
 
 export const getLikesCountApiPlaceCard = (apiCard) => apiCard.likes.length;
+
+export const getIsLikedApiPlaceCard = (apiCard, userId) =>
+    apiCard.likes.some(likedUser => likedUser._id === userId);

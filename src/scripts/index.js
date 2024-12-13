@@ -37,6 +37,7 @@ const init = async () => {
             clickElementSelector: getClassSelector(CSS_CLASS.newPlaceButton),
             onSuccessSave: (cardEntity) => initCardElement({
                 cardEntity,
+                userEntity,
                 insertPosition: DOM_INSERT_POSITION.prepend
             }),
         });
@@ -49,6 +50,7 @@ const init = async () => {
             }))
             .forEach((cardEntity) => initCardElement({
                 cardEntity,
+                userEntity,
                 insertPosition: DOM_INSERT_POSITION.append
             }));
     }

@@ -1,8 +1,9 @@
 import {addEventListener, insertAndGetElement, copyTemplateById} from "../dom/elements";
 import {CSS_CLASS, CSS_ID, getClassSelector} from "../dom/selector";
 import {requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard} from "../api";
-import {getLikesCountApiPlaceCard} from "../entities";
+import {getLikesCountApiPlaceCard, normalizePlaceCard} from "../entities";
 import {openPlaceCardImagePreviewModal} from "./imagePreviewModal";
+import {copyByMutate} from "../utils/copyByMutate";
 
 const getPlacesListElement = () => document.querySelector(getClassSelector(CSS_CLASS.placesList));
 const getTitleElement = (cardElement) => cardElement.querySelector(getClassSelector(CSS_CLASS.cardTitle));
@@ -67,25 +68,45 @@ const enableCardHandlers = ({ cardElement, onLike, onDelete, onClickImage }) => 
     }
 };
 
-const handleLikeCard = async ({ cardEntity, cardElement }) => {
+const handleLikeCard = async ({ cardEntity, cardElement, userEntity }) => {
     if (cardEntity.isLiked) {
-        const updatedCard = await requestDislikePlaceCard(cardEntity.id);
+        const updatedApiCard = await requestDislikePlaceCard(cardEntity.id);
 
-        if (updatedCard) {
+        if (updatedApiCard) {
+            const updatedCardEntity = normalizePlaceCard({
+                apiCard: updatedApiCard,
+                userId: userEntity.id
+            });
+
             getLikeButtonElement(cardElement).classList.remove(CSS_CLASS.cardLikeButtonActive);
             getLikesCountElement(cardElement).textContent =
-                getLikesCountTextContent(getLikesCountApiPlaceCard(updatedCard));
+                getLikesCountTextContent(updatedCardEntity.likesCount);
+
+            copyByMutate({
+                from: updatedCardEntity,
+                to: cardEntity
+            });
         }
 
         return;
     }
 
-    const updatedCard = await requestLikePlaceCard(cardEntity.id);
+    const updatedApiCard = await requestLikePlaceCard(cardEntity.id);
 
-    if (updatedCard) {
+    if (updatedApiCard) {
+        const updatedCardEntity = normalizePlaceCard({
+            apiCard: updatedApiCard,
+            userId: userEntity.id
+        });
+
         getLikeButtonElement(cardElement).classList.add(CSS_CLASS.cardLikeButtonActive);
         getLikesCountElement(cardElement).textContent =
-            getLikesCountTextContent(getLikesCountApiPlaceCard(updatedCard));
+            getLikesCountTextContent(getLikesCountApiPlaceCard(updatedApiCard));
+
+        copyByMutate({
+            from: updatedCardEntity,
+            to: cardEntity
+        });
     }
 };
 
@@ -108,9 +129,10 @@ const handleDeleteCard = async ({
 
 /**
  * @param cardEntity - объект места
+ * @param userEntity - объект текущего пользователя
  * @param insertPosition - позиция вставки (append, prepend)
  */
-export const initCardElement = ({ cardEntity, insertPosition }) => {
+export const initCardElement = ({ cardEntity, userEntity, insertPosition }) => {
     const cardFragment = createCardFragment(cardEntity);
 
     const cardElement = insertAndGetElement({
@@ -123,7 +145,8 @@ export const initCardElement = ({ cardEntity, insertPosition }) => {
         cardElement,
         onLike: () => handleLikeCard({
             cardEntity,
-            cardElement
+            cardElement,
+            userEntity
         }),
         onDelete: () => handleDeleteCard({
             cardEntity,
