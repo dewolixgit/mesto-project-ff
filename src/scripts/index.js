@@ -7,6 +7,7 @@ import {updateProfileSection} from "./components/profileSection";
 import {CSS_CLASS, getClassSelector} from "./dom/selector";
 import {requestCards, requestUser} from "./api";
 import {normalizePlaceCard, normalizeUser} from "./entities";
+import {DOM_INSERT_POSITION} from "./dom/elements";
 
 const init = async () => {
     const [apiUser, apiCards] = await Promise.all([
@@ -34,7 +35,10 @@ const init = async () => {
         enableOpenNewPlaceModalHandler({
             userEntity,
             clickElementSelector: getClassSelector(CSS_CLASS.newPlaceButton),
-            onSuccessSave: initCardElement,
+            onSuccessSave: (cardEntity) => initCardElement({
+                cardEntity,
+                insertPosition: DOM_INSERT_POSITION.prepend
+            }),
         });
     }
 
@@ -43,7 +47,10 @@ const init = async () => {
                 apiCard,
                 userId: userEntity.id
             }))
-            .forEach(initCardElement);
+            .forEach((cardEntity) => initCardElement({
+                cardEntity,
+                insertPosition: DOM_INSERT_POSITION.append
+            }));
     }
 };
 

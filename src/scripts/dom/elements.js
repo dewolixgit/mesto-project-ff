@@ -8,7 +8,24 @@ export const addEventListener = (element, event, handler) => {
     return () => element.removeEventListener(event, handler);
 }
 
-export const appendAndGetElement = ({ element, parent }) => {
-    parent.appendChild(element);
-    return parent.lastChild;
+export const DOM_INSERT_POSITION = {
+    prepend: 'prepend',
+    append: 'append',
+}
+
+/**
+ * @param element - вставляемый элемент
+ * @param parent - родительский элемент (куда нужно вставить элемент)
+ * @param position - позиция вставки (append, prepend)
+ */
+export const insertAndGetElement = ({ element, parent, position }) => {
+    switch (position) {
+        case DOM_INSERT_POSITION.prepend:
+            parent.prepend(element);
+            return parent.firstChild;
+        case DOM_INSERT_POSITION.append:
+        default:
+            parent.appendChild(element);
+            return parent.lastChild;
+    }
 }

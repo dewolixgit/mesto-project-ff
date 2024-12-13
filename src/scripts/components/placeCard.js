@@ -1,7 +1,7 @@
-import { addEventListener, appendAndGetElement, copyTemplateById } from "../dom/elements";
-import { CSS_CLASS, CSS_ID, getClassSelector } from "../dom/selector";
-import { requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard } from "../api";
-import { getLikesCountApiPlaceCard } from "../entities";
+import {addEventListener, insertAndGetElement, copyTemplateById} from "../dom/elements";
+import {CSS_CLASS, CSS_ID, getClassSelector} from "../dom/selector";
+import {requestDislikePlaceCard, requestLikePlaceCard, requestRemovePlaceCard} from "../api";
+import {getLikesCountApiPlaceCard} from "../entities";
 import {openPlaceCardImagePreviewModal} from "./imagePreviewModal";
 
 const getPlacesListElement = () => document.querySelector(getClassSelector(CSS_CLASS.placesList));
@@ -106,12 +106,17 @@ const handleDeleteCard = async ({
     }
 };
 
-export const initCardElement = (cardEntity) => {
+/**
+ * @param cardEntity - объект места
+ * @param insertPosition - позиция вставки (append, prepend)
+ */
+export const initCardElement = ({ cardEntity, insertPosition }) => {
     const cardFragment = createCardFragment(cardEntity);
 
-    const cardElement = appendAndGetElement({
+    const cardElement = insertAndGetElement({
         element: cardFragment,
-        parent: getPlacesListElement()
+        parent: getPlacesListElement(),
+        position: insertPosition,
     });
 
     const removeListeners = enableCardHandlers({
