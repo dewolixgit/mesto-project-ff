@@ -62,7 +62,7 @@ export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuc
 
         const removeFormListeners = enableModalFormValidation(CSS_CLASS.changeAvatarPopup);
 
-        enableSaveButtonHandler({
+        const removeSaveButtonHandlers = enableSaveButtonHandler({
             modal,
             onSuccessSave
         })
@@ -73,6 +73,7 @@ export const enableOpenChangeAvatarModalHandler = ({ clickElementSelector, onSuc
                 onClose: () => {
                     clearModalFormValidation(CSS_CLASS.changeAvatarPopup);
                     removeFormListeners();
+                    removeSaveButtonHandlers();
                 }
             })
         );

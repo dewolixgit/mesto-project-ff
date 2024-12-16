@@ -62,7 +62,7 @@ export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccess
 
         const removeFormListeners = enableModalFormValidation(CSS_CLASS.newPlacePopup);
 
-        enableCreateNewPlaceHandlers({
+        const removeCreateNewPlaceHandlers = enableCreateNewPlaceHandlers({
             modal,
             onSuccessSave,
             userEntity,
@@ -74,6 +74,7 @@ export const enableOpenNewPlaceModalHandler = ({ clickElementSelector, onSuccess
                 onClose: () => {
                     clearModalFormValidation(CSS_CLASS.newPlacePopup);
                     removeFormListeners();
+                    removeCreateNewPlaceHandlers();
                 }
             })
         );
