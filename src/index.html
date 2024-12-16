@@ -40,11 +40,13 @@
       <form class="popup__form" name="edit-profile">
         <div class="popup__form-group">
           <div class="popup__form-item">
-            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required>
+            <!-- Autocomplete выключен, так как почему-то выбор невалидной подсказки
+                 переключает инпут в валидное состояние -->
+            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required autocomplete="off">
             <span class="popup__error-message popup__error-message_type_name"></span>
           </div>
           <div class="popup__form-item">
-            <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required>
+            <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required autocomplete="off">
             <span class="popup__error-message popup__error-message_type_description"></span>
           </div>
         </div>
@@ -59,11 +61,11 @@
       <form class="popup__form" name="new-place">
         <div class="popup__form-group">
           <div class="popup__form-item">
-            <input type="text" name="place-name" class="popup__input popup__input_type_place-name" placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required>
+            <input type="text" name="place-name" class="popup__input popup__input_type_place-name" placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-Я\s\-]+$" data-pattern-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required autocomplete="off">
             <span class="popup__error-message popup__error-message_type_place-name"></span>
           </div>
           <div class="popup__form-item">
-            <input type="url" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
+            <input type="url" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required autocomplete="off">
             <span class="popup__error-message popup__error-message_type_link"></span>
           </div>
         </div>
@@ -78,7 +80,7 @@
       <form class="popup__form" name="avatar">
         <div class="popup__form-group">
           <div class="popup__form-item">
-            <input type="url" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
+            <input type="url" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required autocomplete="off">
             <span class="popup__error-message popup__error-message_type_link"></span>
           </div>
         </div>
