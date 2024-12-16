@@ -9,10 +9,10 @@ export const request = async ({ url, method, data }) => {
         });
 
         if (!response.ok) {
-            return {
+            return Promise.reject({
                 isError: true,
                 data: null,
-            }
+            });
         }
 
         const responseData = await response.json();
@@ -24,9 +24,9 @@ export const request = async ({ url, method, data }) => {
     } catch (error) {
         console.error(`Client error: ${error}`);
 
-        return {
+        return Promise.reject({
             isError: true,
             data: null,
-        }
+        });
     }
 };
